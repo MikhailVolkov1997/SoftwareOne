@@ -1,0 +1,165 @@
+[
+  {
+    "entityName": "ABAP-obj-left-panel",
+    "attributes": {
+      "PanelWidth": { "value": "400", "default": "100", "type": "Int" },
+      "PanelHeight": { "value": "400", "default": "100", "type": "Int" },
+      "PanelFont": { "value": "Arial", "default": "", "type": "String" },
+      "PanelVisible": { "value": "True", "default": "True", "type": "Boolean" },
+      "PanelBackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "PanelWidget": { "value": "", "default": "", "type": "String" },
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" }
+    },
+    "setName": "Panel-object-template"
+  },
+  {
+    "entityName": "ABAP-obj-right-panel",
+    "attributes": {
+      "PanelWidth": { "value": "400", "default": "100", "type": "Int" },
+      "PanelHeight": { "value": "400", "default": "100", "type": "Int" },
+      "PanelFont": { "value": "Arial", "default": "", "type": "String" },
+      "PanelVisible": { "value": "True", "default": "True", "type": "Boolean" },
+      "PanelBackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "PanelWidget": { "value": "", "default": "", "type": "String" },
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" }
+    },
+    "setName": "Panel-object-template"
+  },
+  {
+    "entityName": "ABAP-obj-top-panel",
+    "attributes": {
+      "PanelWidth": { "value": "400", "default": "100", "type": "Int" },
+      "PanelHeight": { "value": "400", "default": "100", "type": "Int" },
+      "PanelFont": { "value": "Arial", "default": "", "type": "String" },
+      "PanelVisible": { "value": "True", "default": "True", "type": "Boolean" },
+      "PanelBackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "PanelWidget": { "value": "", "default": "", "type": "String" },
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" }
+    },
+    "setName": "Panel-object-template"
+  },
+  {
+    "entityName": "ABAP-obj-bottom-panel",
+    "attributes": {
+      "PanelWidth": { "value": "400", "default": "100", "type": "Int" },
+      "PanelHeight": { "value": "400", "default": "100", "type": "Int" },
+      "PanelFont": { "value": "Arial", "default": "", "type": "String" },
+      "PanelVisible": { "value": "True", "default": "True", "type": "Boolean" },
+      "PanelBackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "PanelWidget": { "value": "", "default": "", "type": "String" },
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" }
+    },
+    "setName": "Panel-object-template"
+  },
+  {
+    "entityName": "ABAP-obj-right-panel",
+    "attributes": {
+      "PanelWidth": { "value": "400", "default": "100", "type": "Int" },
+      "PanelHeight": { "value": "400", "default": "100", "type": "Int" },
+      "PanelFont": { "value": "Arial", "default": "", "type": "String" },
+      "PanelVisible": { "value": "True", "default": "True", "type": "Boolean" },
+      "PanelBackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "PanelWidget": { "value": "", "default": "", "type": "String" },
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" }
+    },
+    "setName": "Panel-object-template"
+  },
+  {
+    "entityName": "SAP-users",
+    "attributes": {
+      "Enabled": { "value": "True", "default": "True", "type": "Boolean" },
+      "Visible": { "value": "True", "default": "True", "type": "Boolean" },
+      "Count": { "value": "0", "default": "0", "type": "Int" },
+      "BackgroundColor": {
+        "value": "FFFFFF",
+        "default": "FFFFFF",
+        "type": "String"
+      },
+      "Font": { "value": "arial", "default": "arial", "type": "String" },
+      "TextColor": { "value": "FFFFFF", "default": "FFFFFF", "type": "String" },
+      "HoverOver": { "value": "", "default": "", "type": "Entity" },
+      "SPL": {
+        "value": "index=sap sourcetype=sap:abap EVENT_TYPE=AL08 | bin span=5m _time | stats dc(USERNAME) by _time",
+        "default": "index=sap sourcetype=sap:abap EVENT_TYPE=AL08 | bin span=5m _time | stats dc(USERNAME) by _time",
+        "type": "SPL"
+      },
+      "max": { "value": "100", "default": "100", "type": "Int" },
+      "min": { "value": "0", "default": "0", "type": "Int" },
+      "valueFromSPL": { "value": "$", "default": "$", "type": "String" }
+    },
+    "setName": "Racetrack-object-template"
+  },
+
+  
+  {
+    "entityName": "ABAP-default",
+    "attributes": {
+      "topPanel": {
+        "value": "Panel-object-template:ABAP-obj-top-panel",
+        "default": "",
+        "type": "Entity"
+      },
+      "bottomPanel": {
+        "value": "Panel-object-template:ABAP-obj-bottom-panel",
+        "default": "",
+        "type": "Entity"
+      },
+      "leftPanel": {
+        "value": "Panel-object-template:ABAP-obj-left-panel",
+        "default": "",
+        "type": "Entity"
+      },
+      "rightPanel": {
+        "value": "Panel-object-template:ABAP-obj-right-panel",
+        "default": "",
+        "type": "Entity"
+      },
+      "Name": { "value": "", "default": "", "type": "String" }
+    },
+    "setName": "ABAP-object-template"
+  },
+  {
+    "attributes": {
+      "circle0": {
+        "entityName": "ABAP-obj-left-panel",
+        "rectDotLeft": 195,
+        "rectDotTop": 159,
+        "setName": "Panel-object-template"
+      }
+    },
+    "entityName": "test",
+    "setName": "apmPage"
+  },
+  {
+    "attributes": {
+      "circle0": {
+        "entityName": "ABAP-default",
+        "rectDotLeft": 80,
+        "rectDotTop": 240,
+        "setName": "ABAP-object-template"
+      }
+    },
+    "entityName": "page1",
+    "setName": "apmPage"
+  }
+]
