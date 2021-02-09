@@ -1,8 +1,10 @@
-import React from "react";
-import "./Entity.css";
-import { getBasicParams } from "./getBasicParams";
+import React from 'react'
+import { getBasicParams } from '../../utils/getBasicParams'
+import './Entity.css'
+
 const Entity = ({ setSelected, item }) => {
-  const { left, top, name, property } = getBasicParams(item);
+  const { left, top, name, property } = getBasicParams(item)
+  console.log(getBasicParams(item))
 
   return (
     <div
@@ -12,6 +14,6 @@ const Entity = ({ setSelected, item }) => {
     >
       <span>{name}</span>
     </div>
-  );
-};
-export default Entity;
+  )
+}
+export default Entity
