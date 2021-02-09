@@ -1,12 +1,30 @@
 .upper-wrapper {
   display: flex;
 }
+
+.top-field,
+.bottom-field,
 .left-side,
-.righ-side {
+.right-side {
+  position: absolute;
+}
+
+.left-side,
+.right-side {
   min-width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.left-side {
+  bottom: 0;
+  left: 0;
+}
+
+.right-side {
+  top: 0;
+  right: 0;
 }
 
 .middle-part {
@@ -29,4 +47,14 @@
   min-height: 200px;
   display: flex;
   justify-content: flex-start;
+}
+
+.top-field {
+  top: 0;
+  left: 0;
+}
+
+.bottom-field {
+  bottom: 0;
+  right: 0;
 }

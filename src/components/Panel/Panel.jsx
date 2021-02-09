@@ -1,9 +1,10 @@
-import React from "react";
-import "./Panel.css";
-import PanelEntity from "./PanelEntity/PanelEntity";
+import React from 'react'
+import './Panel.css'
+import PanelEntity from './PanelEntity/PanelEntity'
+
 const Panel = ({ children, panels }) => {
-  if (!panels) return <div className="entity-field">{children}</div>;
-  const { left, right, bottom, top } = panels;
+  if (!panels) return <div className="entity-field">{children}</div>
+  const { left, right, bottom, top } = panels
 
   return (
     <div className="upper-wrapper">
@@ -17,7 +18,6 @@ const Panel = ({ children, panels }) => {
       <div className="middle-side">
         {Boolean(top) && top.length && (
           <div className="top-field">
-            {" "}
             {top.map((panel, index) => (
               <PanelEntity key={index} panel={panel} />
             ))}
@@ -34,13 +34,13 @@ const Panel = ({ children, panels }) => {
       </div>
       {Boolean(right) && right.length && (
         <div className="right-side">
-          {" "}
+          {' '}
           {right.map((panel, index) => (
             <PanelEntity key={index} panel={panel} />
           ))}
         </div>
       )}
     </div>
-  );
-};
-export default Panel;
+  )
+}
+export default Panel
