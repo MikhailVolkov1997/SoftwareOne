@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { EntityService } from '../services'
 
 const getAttributes = (entity) => {
