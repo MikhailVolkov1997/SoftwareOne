@@ -3,7 +3,7 @@ import { getBasicParams } from '../../utils/getBasicParams'
 import './Entity.css'
 
 const Entity = ({ setSelected, item }) => {
-  const { left, top, name, property } = getBasicParams(item)
+  const { left, top, name } = getBasicParams(item)
   console.log(getBasicParams(item))
 
   return (

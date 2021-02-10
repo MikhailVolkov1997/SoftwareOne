@@ -1,0 +1,11 @@
+.diagram-wrapper > .diagram-component {
+  width: 1400px;
+  height: 550px;
+  border: solid 2px black;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.diagram-wrapper > .mode-buttons > button {
+  display: flex;
+}

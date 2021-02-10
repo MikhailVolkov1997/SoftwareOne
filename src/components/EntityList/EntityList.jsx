@@ -11,7 +11,7 @@ const EntityList = () => {
   const [panels, setPanels] = useState()
   const [loading, setLoading] = useState(false)
 
-  const { entities, addEntityItem } = usePopulateEntities(setLoading)
+  const { entities } = usePopulateEntities(setLoading)
 
   usePopulateDetails(selected, setPanels, setLoading)
 

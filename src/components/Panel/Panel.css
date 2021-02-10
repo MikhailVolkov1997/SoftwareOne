@@ -1,7 +1,3 @@
-.upper-wrapper {
-  display: flex;
-}
-
 .top-field,
 .bottom-field,
 .left-side,
@@ -37,11 +33,13 @@
   justify-content: flex-start;
   position: relative;
 }
+
 .entity-field {
-  position: relative;
-  min-width: 800px;
-  min-height: 800px;
+  width: 100%;
+  height: 100%;
+  padding: 250px;
 }
+
 .top-field,
 .bottom-field {
   min-height: 200px;
