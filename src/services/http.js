@@ -1,8 +1,8 @@
 import axios from 'axios'
+import config from '../config'
 
 export const http = axios.create({
-  credentials: 'same-origin',
-  baseURL: 'https://52.243.97.180:8089/servicesNS/nobody/apmTest2/api/sets'
+  baseURL: config.API_URL
 })
 
 http.interceptors.request.use(
