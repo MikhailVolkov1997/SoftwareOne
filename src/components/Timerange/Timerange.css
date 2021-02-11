@@ -1,0 +1,6 @@
+.time-range {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin: 10px;
+}
