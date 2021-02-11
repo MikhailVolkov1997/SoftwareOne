@@ -1,13 +1,13 @@
+import * as React from 'react'
 import * as go from 'gojs'
 import { ReactDiagram } from 'gojs-react'
-import * as React from 'react'
+import _ from 'lodash'
 
-import { FreehandDrawingTool } from './FreehandDrawingTool'
-import { GeometryReshapingTool } from './GeometryReshapingTool'
+import diagramOptions from './diagram.options'
+import TemporaryDrawer from '../Drawer'
+import Modal from '../Modal'
 
 import './Canvas.css'
-import diagramOptions from './diagram.options'
-import Modal from '../Modal'
 
 export default class DiagramWrapper extends React.Component {
   constructor(props) {
@@ -16,7 +16,9 @@ export default class DiagramWrapper extends React.Component {
 
     this.state = {
       openModal: false,
-      modalData: null
+      drawerData: null,
+      openDrawer: false,
+      diagramData: []
     }
   }
 
@@ -27,18 +29,30 @@ export default class DiagramWrapper extends React.Component {
       }
     } = event
 
-    this.setState({ openModal: true, modalData: data })
+    this.setState({ openDrawer: true, drawerData: data })
+  }
+
+  openModal = () => {
+    this.setState({ openModal: true })
   }
 
   closeModal = () => {
     this.setState({ openModal: false })
   }
 
+  autoCloseModal = (timeout) => {
+    setTimeout(this.closeModal, timeout)
+  }
+
+  closeDrawer = () => {
+    this.setState({ openDrawer: false })
+  }
+
   componentDidMount() {
     if (!this.diagramRef.current) return
     const diagram = this.diagramRef.current.getDiagram()
     if (diagram instanceof go.Diagram) {
-      diagram.addDiagramListener('ObjectSingleClicked', this.onEventListener)
+      diagram.addDiagramListener('ObjectDoubleClicked', this.onEventListener)
     }
   }
 
@@ -46,12 +60,14 @@ export default class DiagramWrapper extends React.Component {
     if (!this.diagramRef.current) return
     const diagram = this.diagramRef.current.getDiagram()
     if (diagram instanceof go.Diagram) {
-      diagram.removeDiagramListener('ChangedSelection', this.onEventListener)
+      diagram.removeDiagramListener('ObjectDoubleClicked', this.onEventListener)
     }
   }
 
   initDiagram = () => {
     const $ = go.GraphObject.make
+
+    this.setState({ diagramData: diagramOptions })
     // set your license key here before creating the diagram: go.Diagram.licenseKey = "...";
     const diagram = $(go.Diagram, {
       allowCopy: false,
@@ -97,9 +113,28 @@ export default class DiagramWrapper extends React.Component {
 
     diagram.linkTemplate = $(go.Link, $(go.Shape, { strokeWidth: 1.5 }))
 
-    diagram.model = $(go.TreeModel, { nodeDataArray: diagramOptions })
+    diagram.model = $(go.TreeModel)
 
     return diagram
+  }
+
+  onChangeModel = (newOption) => {
+    const { diagramData } = this.state
+    const idx = _.findIndex(diagramData, ['key', newOption.key])
+
+    if (idx === -1) return
+
+    diagramData[idx] = newOption
+    this.updateDiagram(newOption)
+
+    const TIMEOUT = 1500
+    this.autoCloseModal(TIMEOUT)
+  }
+
+  updateDiagram = (diagramData) => {
+    this.setState({ diagramData: [] }, () =>
+      this.setState({ diagramData }, this.autoCloseModal)
+    )
   }
 
   render() {
@@ -109,12 +144,18 @@ export default class DiagramWrapper extends React.Component {
           ref={this.diagramRef}
           initDiagram={this.initDiagram}
           divClassName="diagram-component"
-          onModelChange={(e) => console.log(e)}
+          nodeDataArray={this.state.diagramData}
         />
         <Modal
-          modalData={this.state.modalData}
+          text="Model successfuly changed"
           open={this.state.openModal}
           closeModal={this.closeModal}
+        />
+        <TemporaryDrawer
+          open={this.state.openDrawer}
+          closeDrawer={this.closeDrawer}
+          data={this.state.drawerData}
+          onChangeModel={this.onChangeModel}
         />
       </div>
     )

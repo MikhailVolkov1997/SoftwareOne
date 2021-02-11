@@ -19,13 +19,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const ModalWrapper = ({ open, modalData, closeModal }) => {
+export const ModalWrapper = ({ text, open, closeModal }) => {
   const classes = useStyles()
   const handleClose = () => {
     closeModal(false)
   }
-
-  if (_.isEmpty(modalData)) return null
 
   return (
     <Modal
@@ -42,8 +40,7 @@ export const ModalWrapper = ({ open, modalData, closeModal }) => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <h2 id="transition-modal-title">{modalData.text}</h2>
-          <p id="transition-modal-description">{JSON.stringify(modalData)}</p>
+          <p id="transition-modal-description">{text}</p>
         </div>
       </Fade>
     </Modal>

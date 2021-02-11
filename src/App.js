@@ -6,6 +6,7 @@ import { Timerange } from './components/Timerange/Timerange'
 function App() {
   return (
     <div className="App">
+      <Timerange />
       <Canvas />
     </div>
   )
