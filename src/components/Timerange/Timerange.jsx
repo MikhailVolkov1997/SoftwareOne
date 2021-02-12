@@ -1,24 +1,28 @@
 import React, { useState } from 'react'
+import { toNumber } from 'lodash'
 import { Button, TextField } from '@material-ui/core'
+
+import './Timerange.css'
 
 import { Autocomplete } from '@material-ui/lab'
 import periodOptions from './period.options'
-
-import './Timerange.css'
 import { calculateDate } from '../../utils/calculateDate'
-import { toNumber } from 'lodash'
 
 export const Timerange = () => {
-  const [ago, setAgo] = useState(0)
+  const [ago, setAgo] = useState()
   const [period, setPeriod] = useState('')
 
   const changeAgo = (event) => {
     const { value } = event.target
 
-    setAgo(toNumber(value))
+    const droppedZero = value.replace(/^0+/, '')
+
+    setAgo(droppedZero)
   }
 
   const onChangePeriod = (event, value) => {
+    if (!value) return setPeriod('')
+
     const { key } = value
 
     setPeriod(key)
@@ -51,7 +55,7 @@ export const Timerange = () => {
           onChange={onChangePeriod}
           style={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Combo box" variant="outlined" />
+            <TextField {...params} label="Select a Period" variant="outlined" />
           )}
         />
       </div>

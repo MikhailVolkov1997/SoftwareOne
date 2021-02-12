@@ -1,13 +1,15 @@
 import moment from 'moment'
-import _ from 'lodash'
+import { toNumber, toString } from 'lodash'
 
 export const calculateDate = (period, ago) => {
-  if (!_.isString(period) || !_.isNumber(ago)) return
+  if (!period || !ago) return
 
   const formatExp = 'YYYY,MMM,DD|HH.mm.ss.SSS'
+  const currentDate = moment()
+  const from = currentDate
+    .add(toNumber(-ago), toString(period))
+    .format(formatExp)
+  const to = currentDate.format(formatExp)
 
-  const prevDate = moment().add(-ago, period).format(formatExp)
-  const currentDate = moment().format(formatExp)
-
-  return { from: prevDate, to: currentDate }
+  return { from, to }
 }

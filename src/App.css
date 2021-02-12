@@ -1,7 +1,4 @@
 .App {
-  /* background-color:#e0e0e0; */
-  height: 100vh;
-  width: 100%;
   background: linear-gradient(90deg, #ece6f9 21px, transparent 1%) center,
     linear-gradient(#ece6f9 21px, transparent 1%) center, #1e1c24;
   background-size: 22px 22px;

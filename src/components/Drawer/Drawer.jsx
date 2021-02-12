@@ -1,9 +1,7 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import Divider from '@material-ui/core/Divider'
-import { DrawerFields } from './DrawerFileds'
 
-export const TemporaryDrawer = ({ open, closeDrawer, data, onChangeModel }) => {
+export const TemporaryDrawer = ({ open, closeDrawer, children }) => {
   const toggleDrawer = (event) => {
     if (
       event.type === 'keydown' &&
@@ -18,12 +16,7 @@ export const TemporaryDrawer = ({ open, closeDrawer, data, onChangeModel }) => {
   return (
     <div>
       <Drawer anchor={'right'} open={open} onClose={toggleDrawer}>
-        <DrawerFields
-          data={data}
-          onChangeModel={onChangeModel}
-          closeDrawer={closeDrawer}
-        />
-        <Divider />
+        {children}
       </Drawer>
     </div>
   )

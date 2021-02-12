@@ -4,4 +4,12 @@
   gap: 40px;
   align-items: center;
   margin: 40px;
+  max-width: 300px;
+}
+
+.MuiTypography-root.MuiTypography-h3 {
+  text-overflow: ellipsis;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
 }

@@ -1,13 +1,16 @@
 import * as React from 'react'
 import * as go from 'gojs'
 import { ReactDiagram } from 'gojs-react'
-import _ from 'lodash'
+import _, { last } from 'lodash'
 
 import diagramOptions from './diagram.options'
 import TemporaryDrawer from '../Drawer'
 import Modal from '../Modal'
 
 import './Canvas.css'
+import { DrawerFields } from '../Drawer/DrawerFileds'
+import { Divider } from '@material-ui/core'
+import { AddNewItem } from '../Drawer/AddNewItem'
 
 export default class DiagramWrapper extends React.Component {
   constructor(props) {
@@ -40,8 +43,8 @@ export default class DiagramWrapper extends React.Component {
     this.setState({ openModal: false })
   }
 
-  autoCloseModal = (timeout) => {
-    setTimeout(this.closeModal, timeout)
+  autoCloseModal = () => {
+    setTimeout(this.closeModal, 1500)
   }
 
   closeDrawer = () => {
@@ -125,16 +128,34 @@ export default class DiagramWrapper extends React.Component {
     if (idx === -1) return
 
     diagramData[idx] = newOption
-    this.updateDiagram(newOption)
 
-    const TIMEOUT = 1500
-    this.autoCloseModal(TIMEOUT)
+    this.openModal()
+    this.updateDiagram(diagramData)
   }
 
   updateDiagram = (diagramData) => {
     this.setState({ diagramData: [] }, () =>
       this.setState({ diagramData }, this.autoCloseModal)
     )
+  }
+
+  addNewItem = (newItem) => {
+    const { diagramData } = this.state
+    const lastKey = last(diagramData).key
+
+    if (!lastKey) return
+
+    const newKey = lastKey + 1
+
+    const newElement = {
+      ...newItem,
+      key: newKey
+    }
+
+    diagramData.push(newElement)
+
+    this.openModal()
+    this.updateDiagram(diagramData)
   }
 
   render() {
@@ -154,9 +175,19 @@ export default class DiagramWrapper extends React.Component {
         <TemporaryDrawer
           open={this.state.openDrawer}
           closeDrawer={this.closeDrawer}
-          data={this.state.drawerData}
-          onChangeModel={this.onChangeModel}
-        />
+        >
+          <DrawerFields
+            data={this.state.drawerData}
+            onChangeModel={this.onChangeModel}
+            closeDrawer={this.closeDrawer}
+          />
+          <Divider />
+          <AddNewItem
+            data={this.state.drawerData}
+            closeDrawer={this.closeDrawer}
+            addNewItem={this.addNewItem}
+          />
+        </TemporaryDrawer>
       </div>
     )
   }

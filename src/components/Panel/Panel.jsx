@@ -1,6 +1,6 @@
 import React from 'react'
 import Canvas from '../Canvas/Canvas'
-import { Timerange } from '../Timerange/Timerange'
+import { TopPanel } from '../TopPanel/TopPanel'
 import './Panel.css'
 import PanelEntity from './PanelEntity/PanelEntity'
 
@@ -10,7 +10,7 @@ const Panel = ({ children, panels }) => {
 
   return (
     <>
-      <Timerange />
+      <TopPanel />
       <div className="upper-wrapper">
         {Boolean(left) && left.length && (
           <div className="left-side">
@@ -28,6 +28,7 @@ const Panel = ({ children, panels }) => {
             </div>
           )}
           <div className="entity-field">{<Canvas />}</div>
+
           {Boolean(bottom) && bottom.length && (
             <div className="bottom-field">
               {bottom.map((panel, index) => (

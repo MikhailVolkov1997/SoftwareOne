@@ -1,0 +1,7 @@
+.top-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(93, 204, 231);
+  padding: 30px;
+}
