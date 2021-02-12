@@ -1,10 +1,15 @@
 import React from 'react'
-import Canvas from '../Canvas/Canvas'
-import { TopPanel } from '../TopPanel/TopPanel'
+
 import './Panel.css'
+
+import DiagramWrapper from '../Canvas/DiagramWrapper'
+import { TopPanel } from '../TopPanel/TopPanel'
 import PanelEntity from './PanelEntity/PanelEntity'
+import useStateCallback from '../../utils/useStateCallback'
 
 const Panel = ({ children, panels }) => {
+  const [diagramData, setDiagramData] = useStateCallback([])
+
   if (!panels) return <div className="entity-field">{children}</div>
   const { left, right, bottom, top } = panels
 
@@ -27,7 +32,12 @@ const Panel = ({ children, panels }) => {
               ))}
             </div>
           )}
-          <div className="entity-field">{<Canvas />}</div>
+          <div className="entity-field">
+            <DiagramWrapper
+              diagramData={diagramData}
+              setDiagramData={setDiagramData}
+            />
+          </div>
 
           {Boolean(bottom) && bottom.length && (
             <div className="bottom-field">

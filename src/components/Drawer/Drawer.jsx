@@ -1,7 +1,14 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 
-export const TemporaryDrawer = ({ open, closeDrawer, children }) => {
+import './Drawer.css'
+
+export const TemporaryDrawer = ({
+  open,
+  closeDrawer,
+  side = 'right',
+  children
+}) => {
   const toggleDrawer = (event) => {
     if (
       event.type === 'keydown' &&
@@ -15,7 +22,7 @@ export const TemporaryDrawer = ({ open, closeDrawer, children }) => {
 
   return (
     <div>
-      <Drawer anchor={'right'} open={open} onClose={toggleDrawer}>
+      <Drawer anchor={side} open={open} onClose={toggleDrawer}>
         {children}
       </Drawer>
     </div>

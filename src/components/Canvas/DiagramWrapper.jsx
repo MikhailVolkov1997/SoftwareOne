@@ -3,11 +3,11 @@ import * as go from 'gojs'
 import { ReactDiagram } from 'gojs-react'
 import _, { last } from 'lodash'
 
+import './DiagramWrapper.css'
+
 import diagramOptions from './diagram.options'
 import TemporaryDrawer from '../Drawer'
 import Modal from '../Modal'
-
-import './Canvas.css'
 import { DrawerFields } from '../Drawer/DrawerFileds'
 import { Divider } from '@material-ui/core'
 import { AddNewItem } from '../Drawer/AddNewItem'
@@ -20,8 +20,7 @@ export default class DiagramWrapper extends React.Component {
     this.state = {
       openModal: false,
       drawerData: null,
-      openDrawer: false,
-      diagramData: []
+      openDrawer: false
     }
   }
 
@@ -70,7 +69,7 @@ export default class DiagramWrapper extends React.Component {
   initDiagram = () => {
     const $ = go.GraphObject.make
 
-    this.setState({ diagramData: diagramOptions })
+    this.props.setDiagramData(diagramOptions)
     // set your license key here before creating the diagram: go.Diagram.licenseKey = "...";
     const diagram = $(go.Diagram, {
       allowCopy: false,
@@ -122,7 +121,7 @@ export default class DiagramWrapper extends React.Component {
   }
 
   onChangeModel = (newOption) => {
-    const { diagramData } = this.state
+    const { diagramData } = this.props
     const idx = _.findIndex(diagramData, ['key', newOption.key])
 
     if (idx === -1) return
@@ -134,13 +133,17 @@ export default class DiagramWrapper extends React.Component {
   }
 
   updateDiagram = (diagramData) => {
-    this.setState({ diagramData: [] }, () =>
-      this.setState({ diagramData }, this.autoCloseModal)
+    this.props.setDiagramData(
+      [],
+      () => this.props.setDiagramData(diagramData),
+      this.autoCloseModal
     )
+
+    this.autoCloseModal()
   }
 
   addNewItem = (newItem) => {
-    const { diagramData } = this.state
+    const { diagramData } = this.props
     const lastKey = last(diagramData).key
 
     if (!lastKey) return
@@ -165,7 +168,7 @@ export default class DiagramWrapper extends React.Component {
           ref={this.diagramRef}
           initDiagram={this.initDiagram}
           divClassName="diagram-component"
-          nodeDataArray={this.state.diagramData}
+          nodeDataArray={this.props.diagramData}
         />
         <Modal
           text="Model successfuly changed"
@@ -173,6 +176,7 @@ export default class DiagramWrapper extends React.Component {
           closeModal={this.closeModal}
         />
         <TemporaryDrawer
+          side={'right'}
           open={this.state.openDrawer}
           closeDrawer={this.closeDrawer}
         >

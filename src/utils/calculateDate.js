@@ -4,12 +4,14 @@ import { toNumber, toString } from 'lodash'
 export const calculateDate = (period, ago) => {
   if (!period || !ago) return
 
+  console.log(period, ago)
+
   const formatExp = 'YYYY,MMM,DD|HH.mm.ss.SSS'
-  const currentDate = moment()
-  const from = currentDate
+  const currentDate = new Date()
+  const from = moment(currentDate)
     .add(toNumber(-ago), toString(period))
     .format(formatExp)
-  const to = currentDate.format(formatExp)
+  const to = moment(currentDate).format(formatExp)
 
   return { from, to }
 }

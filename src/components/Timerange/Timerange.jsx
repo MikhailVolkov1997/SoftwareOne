@@ -9,7 +9,7 @@ import periodOptions from './period.options'
 import { calculateDate } from '../../utils/calculateDate'
 
 export const Timerange = () => {
-  const [ago, setAgo] = useState()
+  const [ago, setAgo] = useState('')
   const [period, setPeriod] = useState('')
 
   const changeAgo = (event) => {

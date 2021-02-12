@@ -38,17 +38,6 @@
   right: 0;
 }
 
-/* .middle-part {
-  display: block;
-  flex-grow: 1;
-  margin: 0 2px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  position: relative;
-} */
-
 .entity-field {
   position: absolute;
   left: 22%;

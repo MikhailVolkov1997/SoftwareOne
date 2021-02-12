@@ -1,0 +1,17 @@
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  align-items: center;
+  gap: 30px;
+}
+
+.add-new {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.MuiDrawer-paper {
+  width: 520px;
+}
