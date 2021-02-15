@@ -4,11 +4,11 @@ import { Timerange } from '../Timerange/Timerange'
 
 import './TopPanel.css'
 
-export const TopPanel = () => {
+export const TopPanel = ({ onSaveChanges, diagramData }) => {
   return (
     <div className="top-panel">
       <Timerange />
-      <DiagramConfig />
+      <DiagramConfig onSaveChanges={onSaveChanges} diagramData={diagramData} />
     </div>
   )
 }

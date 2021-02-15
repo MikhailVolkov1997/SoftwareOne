@@ -129,17 +129,7 @@ export default class DiagramWrapper extends React.Component {
     diagramData[idx] = newOption
 
     this.openModal()
-    this.updateDiagram(diagramData)
-  }
-
-  updateDiagram = (diagramData) => {
-    this.props.setDiagramData(
-      [],
-      () => this.props.setDiagramData(diagramData),
-      this.autoCloseModal
-    )
-
-    this.autoCloseModal()
+    this.updateDiagram(diagramData, this.autoCloseModal)
   }
 
   addNewItem = (newItem) => {
@@ -158,7 +148,7 @@ export default class DiagramWrapper extends React.Component {
     diagramData.push(newElement)
 
     this.openModal()
-    this.updateDiagram(diagramData)
+    this.updateDiagram(diagramData, this.autoCloseModal)
   }
 
   render() {
