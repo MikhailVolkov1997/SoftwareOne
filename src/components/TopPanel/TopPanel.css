@@ -1,7 +1,9 @@
 .top-panel {
   display: flex;
+  height: 4vh;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(93, 204, 231);
-  padding: 30px;
+  background-color: rgb(89 119 121 / 51%);
+  border-bottom: 1px solid rgb(89 119 121 / 99%);
+  padding: 0 30px;
 }

@@ -3,4 +3,38 @@
   gap: 30px;
   align-items: center;
   text-align: center;
+  background-color: #3d73776b;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px rgb(0 105 255 / 10%),
+    -4px -4px 10px rgb(12 112 255 / 10%);
+  border-bottom: 1px solid rgb(89 119 121 / 99%);
+}
+
+/* .MuiAutocomplete-inputRoot[class*='MuiOutlinedInput-root'] {
+  padding: 0 !important;
+}
+
+.MuiOutlinedInput-input {
+  padding: 5px !important;
+}
+
+.period > .MuiButton-root {
+  padding: 2px 5px;
+} */
+
+.time-range .period .MuiButton-root {
+  padding: 2px 5px;
+}
+
+.time-range .MuiInputBase-input,
+.time-range
+  .MuiAutocomplete-inputRoot[class*='MuiOutlinedInput-root']
+  .MuiAutocomplete-input {
+  padding: 5px;
+}
+
+.time-range .MuiAutocomplete-inputRoot[class*='MuiOutlinedInput-root'],
+.time-range .MuiAutocomplete-input {
+  padding: 0;
 }

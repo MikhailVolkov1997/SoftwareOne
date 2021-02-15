@@ -13,9 +13,16 @@ const Panel = ({ children, panels }) => {
   if (!panels) return <div className="entity-field">{children}</div>
   const { left, right, bottom, top } = panels
 
+  const onSaveDiagramChanges = (properties) => {
+    setDiagramData([], () => setDiagramData(properties))
+  }
+
   return (
     <>
-      <TopPanel />
+      <TopPanel
+        onSaveChanges={onSaveDiagramChanges}
+        diagramData={diagramData}
+      />
       <div className="upper-wrapper">
         {Boolean(left) && left.length && (
           <div className="left-side">
@@ -35,7 +42,7 @@ const Panel = ({ children, panels }) => {
           <div className="entity-field">
             <DiagramWrapper
               diagramData={diagramData}
-              setDiagramData={setDiagramData}
+              setDiagramData={onSaveDiagramChanges}
             />
           </div>
 

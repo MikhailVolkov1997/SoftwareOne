@@ -1,11 +1,17 @@
 import React from 'react'
-import { TextField } from '@material-ui/core'
+import { Fab, TextField, Tooltip } from '@material-ui/core'
+import RemoveIcon from '@material-ui/icons/Remove'
 
 import './NewConfigFields.css'
 
-export const NewConfigFields = ({ name, value, handleChange }) => {
+export const NewConfigFields = ({
+  name,
+  value,
+  handleChange,
+  onRemoveProperty
+}) => {
   return (
-    <div>
+    <div className="new-config-fields">
       <TextField
         id="outlined-multiline-flexible"
         label="Name"
@@ -26,6 +32,11 @@ export const NewConfigFields = ({ name, value, handleChange }) => {
         onChange={handleChange}
         variant="outlined"
       />
+      <Tooltip title="Add" aria-label="add">
+        <Fab color="primary" onClick={onRemoveProperty}>
+          <RemoveIcon />
+        </Fab>
+      </Tooltip>
     </div>
   )
 }

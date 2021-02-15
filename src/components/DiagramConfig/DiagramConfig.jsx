@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddIcon from '@material-ui/icons/Add'
 import { Button, Fab, Tooltip, Typography } from '@material-ui/core'
 
@@ -6,11 +6,34 @@ import './DiagramConfig.css'
 
 import TemporaryDrawer from '../Drawer'
 import { NewConfigFields } from './NewConfigFields'
-import { findIndex, isEmpty } from 'lodash'
+import { findIndex, head, isEmpty, isNull } from 'lodash'
+import { createProperties } from '../../utils/createProperties'
 
-export const DiagramConfig = () => {
+export const DiagramConfig = ({ onSaveChanges, diagramData }) => {
   const [openDrawer, setOpenDrawer] = useState(false)
   const [newProperties, addNewProperties] = useState([])
+
+  useEffect(() => {
+    openDrawer && stateInit(head(diagramData).properties)
+  }, [openDrawer])
+
+  const stateInit = (currentProps) => {
+    if (isEmpty(currentProps)) return
+
+    const existingValues = currentProps.map((item) => {
+      // get current object props
+      const propArr = Object.entries(item)
+      const [name, value] = head(propArr)
+
+      return {
+        name,
+        value,
+        key: Date.now()
+      }
+    })
+
+    addNewProperties(existingValues)
+  }
 
   const onOpenDrawer = () => {
     setOpenDrawer(true)
@@ -23,23 +46,49 @@ export const DiagramConfig = () => {
   const handleChange = (key) => (event) => {
     const { name, value } = event.target
     const state = [...newProperties]
+    const idx = findIndexByKey(state, key)
 
-    const idx = findIndex(state, ['key', key])
-
-    if (idx === -1) return
+    if (isNull(idx)) return
 
     state[idx] = { ...state[idx], [name]: value }
+
     addNewProperties(state)
   }
 
   const onAddProps = () => {
     const state = [...newProperties]
-    state.push({ name: '', value: '', key: state.length + 1 })
+    state.push({ name: '', value: '', key: Date.now() })
 
     addNewProperties(state)
   }
 
-  const onSaveProperties = () => {}
+  const onRemoveProperty = (key) => () => {
+    const state = [...newProperties]
+    const idx = findIndexByKey(state, key)
+
+    if (isNull(idx)) return
+
+    state.splice(idx, 1)
+
+    addNewProperties(state)
+  }
+
+  const onSave = () => {
+    const properties = createProperties(newProperties)
+    const updatedData = diagramData.map((item) => ({ ...item, properties }))
+
+    onSaveChanges(updatedData)
+    onCloseDrawer()
+  }
+
+  const findIndexByKey = (options, key) => {
+    const idx = findIndex(options, ['key', key])
+    const NOT_FOUND = -1
+
+    if (idx === NOT_FOUND) return null
+
+    return idx
+  }
 
   return (
     <div className="diagram-config">
@@ -61,28 +110,24 @@ export const DiagramConfig = () => {
               Add new property
             </Typography>
             <Tooltip title="Add" aria-label="add">
-              <Fab color="primary">
-                <AddIcon onClick={onAddProps} />
+              <Fab color="primary" onClick={onAddProps}>
+                <AddIcon />
               </Fab>
             </Tooltip>
           </div>
-          {newProperties.map(({ name, value, key }) => (
-            <NewConfigFields
-              key={key}
-              name={name}
-              value={value}
-              handleChange={handleChange(key)}
-            />
-          ))}
-          {!isEmpty(newProperties) && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onSaveProperties}
-            >
-              Save
-            </Button>
-          )}
+          {!isEmpty(newProperties) &&
+            newProperties.map(({ name, value, key }) => (
+              <NewConfigFields
+                key={key}
+                name={name}
+                value={value}
+                handleChange={handleChange(key)}
+                onRemoveProperty={onRemoveProperty(key)}
+              />
+            ))}
+          <Button variant="contained" color="primary" onClick={onSave}>
+            Save
+          </Button>
         </div>
       </TemporaryDrawer>
     </div>

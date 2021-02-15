@@ -13,6 +13,7 @@ import { Divider } from '@material-ui/core'
 import { AddNewItem } from '../Drawer/AddNewItem'
 
 export default class DiagramWrapper extends React.Component {
+  TIMEOUT = 1500
   constructor(props) {
     super(props)
     this.diagramRef = React.createRef()
@@ -42,8 +43,8 @@ export default class DiagramWrapper extends React.Component {
     this.setState({ openModal: false })
   }
 
-  autoCloseModal = () => {
-    setTimeout(this.closeModal, 1500)
+  autoCloseModal = (timeout) => {
+    setTimeout(this.closeModal, timeout)
   }
 
   closeDrawer = () => {
@@ -129,17 +130,8 @@ export default class DiagramWrapper extends React.Component {
     diagramData[idx] = newOption
 
     this.openModal()
-    this.updateDiagram(diagramData)
-  }
-
-  updateDiagram = (diagramData) => {
-    this.props.setDiagramData(
-      [],
-      () => this.props.setDiagramData(diagramData),
-      this.autoCloseModal
-    )
-
-    this.autoCloseModal()
+    this.props.setDiagramData(diagramData)
+    this.autoCloseModal(this.TIMEOUT)
   }
 
   addNewItem = (newItem) => {
@@ -158,7 +150,8 @@ export default class DiagramWrapper extends React.Component {
     diagramData.push(newElement)
 
     this.openModal()
-    this.updateDiagram(diagramData)
+    this.props.setDiagramData(diagramData)
+    this.autoCloseModal(this.TIMEOUT)
   }
 
   render() {

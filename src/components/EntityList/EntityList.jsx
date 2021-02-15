@@ -20,11 +20,7 @@ const EntityList = () => {
   }, [selected])
 
   if (loading) {
-    return (
-      <div className="Layout">
-        <div className="Loading">Loading</div>
-      </div>
-    )
+    return <div className="Loading">Loading</div>
   }
 
   return (
@@ -37,4 +33,5 @@ const EntityList = () => {
     </div>
   )
 }
+
 export default EntityList
