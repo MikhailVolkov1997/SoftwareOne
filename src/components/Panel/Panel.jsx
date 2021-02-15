@@ -13,8 +13,8 @@ const Panel = ({ children, panels }) => {
   if (!panels) return <div className="entity-field">{children}</div>
   const { left, right, bottom, top } = panels
 
-  const onSaveDiagramChanges = (properties, callback) => {
-    setDiagramData([], () => setDiagramData(properties, callback))
+  const onSaveDiagramChanges = (properties) => {
+    setDiagramData([], () => setDiagramData(properties))
   }
 
   return (

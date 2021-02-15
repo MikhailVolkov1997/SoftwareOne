@@ -37,10 +37,10 @@ export const Timerange = () => {
       <div className="number-ago">
         <TextField
           id="outlined-number"
-          label="Number"
           type="number"
           value={ago}
           onChange={changeAgo}
+          placeholder="Number"
           InputLabelProps={{
             shrink: true
           }}
@@ -55,7 +55,11 @@ export const Timerange = () => {
           onChange={onChangePeriod}
           style={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Select a Period" variant="outlined" />
+            <TextField
+              {...params}
+              placeholder="Select a Period"
+              variant="outlined"
+            />
           )}
         />
       </div>

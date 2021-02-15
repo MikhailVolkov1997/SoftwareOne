@@ -77,7 +77,8 @@ export const DiagramConfig = ({ onSaveChanges, diagramData }) => {
     const properties = createProperties(newProperties)
     const updatedData = diagramData.map((item) => ({ ...item, properties }))
 
-    onSaveChanges(updatedData, onCloseDrawer)
+    onSaveChanges(updatedData)
+    onCloseDrawer()
   }
 
   const findIndexByKey = (options, key) => {

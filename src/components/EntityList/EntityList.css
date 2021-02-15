@@ -7,3 +7,8 @@
   color: black;
   font-size: 45px;
 }
+
+.Layout {
+  height: 100vh;
+  width: 100%;
+}

@@ -7,8 +7,8 @@ import './TopPanel.css'
 export const TopPanel = ({ onSaveChanges, diagramData }) => {
   return (
     <div className="top-panel">
-      <Timerange />
       <DiagramConfig onSaveChanges={onSaveChanges} diagramData={diagramData} />
+      <Timerange />
     </div>
   )
 }

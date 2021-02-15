@@ -2,7 +2,6 @@ import React from 'react'
 import './PanelEntity.css'
 
 const PanelEntity = ({ panel }) => {
-  console.log(panel)
   const isVisible = panel.visible === 'True'
 
   if (!isVisible) return null
